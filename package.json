@@ -1,0 +1,46 @@
+{
+  "name": "goit-kapusta-team-2-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node ./bin/server.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon ./bin/server.js",
+    "lint": "eslint **/*.js",
+    "lint:fix": "eslint --fix **/*.js",
+    "test": "cross-env NODE_ENV=test jest --no-cache --verbose --detectOpenHandles"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexLeonNovak/goit-kapusta-team-2-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexLeonNovak/goit-kapusta-team-2-api/issues"
+  },
+  "homepage": "https://github.com/AlexLeonNovak/goit-kapusta-team-2-api#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "2.8.5",
+    "cross-env": "7.0.3",
+    "dotenv": "^10.0.0",
+    "express": "4.17.1",
+    "joi": "^17.4.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.8",
+    "morgan": "1.10.0",
+    "multer": "^1.4.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "nodemon": "2.0.7"
+  }
+}
