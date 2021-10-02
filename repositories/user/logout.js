@@ -7,6 +7,7 @@ const logout = async (id) => {
 	}
 	user.accessToken = null;
 	return await user.save();
+	
 }
 
 module.exports = logout;
