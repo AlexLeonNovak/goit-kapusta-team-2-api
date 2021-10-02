@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const User = require('../model/users');
+const UserRepo = require('../repositories/user')
 const ErrorException = require('../exceptions/error.exception');
 
 const {JWT_ACCESS_SECRET} = process.env;
@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
 		if (type !== 'Bearer' || !token) {
 			throw new Error();
 		}
-		const user = await User.getByToken(token);
+		const user = await UserRepo.getByToken(token);
 		const userData = jwt.verify(token, JWT_ACCESS_SECRET);
 		if (!user || !userData) {
 			throw new Error();

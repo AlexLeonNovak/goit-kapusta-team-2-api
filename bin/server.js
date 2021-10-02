@@ -1,5 +1,6 @@
 const app = require('../app');
 const db = require('../model/db');
+const createDirectories = require('./createDirectories');
 
 const { SERVER_PORT = 3000 } = process.env;
 

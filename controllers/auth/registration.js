@@ -1,13 +1,9 @@
-const UserModel = require('../../model/users')
+const UserRepo = require('../../repositories/user')
 
-const registration = async (req, res, next) => {
-	try {
+const registration = async (req, res) => {
 		const {email, password} = req.body;
-		const user = await UserModel.registration(email, password);
+		const user = await UserRepo.registration(email, password);
 		return res.Created({user});
-	} catch (e) {
-		next(e);
-	}
 }
 
 module.exports = registration;

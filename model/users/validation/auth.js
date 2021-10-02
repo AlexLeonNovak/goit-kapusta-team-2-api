@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const {emailRegex} = require('../helpers/constants');
+const {emailRegex} = require('../../../helpers/constants');
 
 const emailSchema = Joi.string().email().pattern(new RegExp(emailRegex)).required();
 

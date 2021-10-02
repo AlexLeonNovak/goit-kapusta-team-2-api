@@ -1,13 +1,9 @@
-const UserModel = require('../../model/users');
+const UserRepo = require('../../repositories/user')
 
-const logout = async (req, res, next) => {
-	try {
+const logout = async (req, res) => {
 		const {id} = req.user;
-		await UserModel.logout(id);
+		await UserRepo.logout(id);
 		return res.NoContent();
-	} catch (e) {
-		next(e);
-	}
 }
 
 module.exports = logout;

@@ -1,7 +1,6 @@
-const User = require('./model');
+const User = require('../../model/users/model');
 const ErrorException = require('../../exceptions/error.exception');
 const userDto = require('../../dtos/user');
-const { sendEmailConfirmation } = require('../../helpers/mailer');
 
 const registration = async (email, password) => {
 	const candidate = await User.findOne({email})
@@ -12,8 +11,6 @@ const registration = async (email, password) => {
 	user.setPassword(password);
 	await user.save();
 
-	const link = `${process.env.SERVER_URL}/api/auth/activate/${user.emailConfirmToken}`;
-	await sendEmailConfirmation(user.email, link);
 
 	return userDto(user);
 }

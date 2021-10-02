@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const User = require('./model');
+const User = require('../../model/users/model');
 const ErrorException = require('../../exceptions/error.exception');
 const userDto = require('../../dtos/user');
 
