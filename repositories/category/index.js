@@ -1,8 +1,5 @@
-const addCategory = require('./addCategory');
-const updateLogo = require('./updateLogo');
-
+const addCategory = require("./addCategory");
 
 module.exports = {
-	addCategory,
-	updateLogo,
-}
+  addCategory,
+};
