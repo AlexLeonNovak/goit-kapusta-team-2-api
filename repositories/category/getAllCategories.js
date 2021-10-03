@@ -1,13 +1,7 @@
 const Category = require("../../model/categories/model");
 
-const getAllCategories = async (res, next) => {
-  try {
-    const categories = await Category.find({});
-
-    res.OK({...categories})
-  } catch (error) {
-    next(error);
-  }
+const getAllCategories = async () => {
+    return await Category.find({});
 };
 
 module.exports = getAllCategories;
