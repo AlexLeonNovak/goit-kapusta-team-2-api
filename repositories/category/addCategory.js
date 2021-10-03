@@ -6,8 +6,7 @@ const { categoriesDir } = require("../../helpers/directories");
 const addCategory = async (name, type, tempPath, filename) => {
   const category = new Category({ name, type });
   const logoName = `${category._id}_${filename}`;
-  const logo = `public/categories/${logoName}`;
-  console.log(categoriesDir);
+  const logo = `categories/${logoName}`;
 
   try {
     await fs.rename(tempPath, path.join(categoriesDir, logoName));

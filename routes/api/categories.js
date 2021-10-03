@@ -13,9 +13,9 @@ const {
 
 router.post(
   "/",
-  uploadFile.single("logo"),
+  uploadFile.single("logo"), validation(joiCategorySchema),
   controllerWrapper(CategoryController.addCategory)
 );
-router.get("/", auth, controllerWrapper(CategoryController.getAllCategories));
+router.get("/",  controllerWrapper(CategoryController.getAllCategories));
 
 module.exports = router;
