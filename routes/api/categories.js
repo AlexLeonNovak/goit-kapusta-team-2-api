@@ -16,6 +16,6 @@ router.post(
   uploadFile.single("logo"), validation(joiCategorySchema),
   controllerWrapper(CategoryController.addCategory)
 );
-router.get("/",  controllerWrapper(CategoryController.getAllCategories));
+router.get("/", auth, controllerWrapper(CategoryController.getAllCategories));
 
 module.exports = router;
