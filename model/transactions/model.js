@@ -10,7 +10,7 @@ const transactionSchema = Schema(
       required: [true, "categoryId is required"],
     },
     amount: {
-      type: String,
+      type: Number,
       required: [true, "amount is required"],
     },
     description: {
