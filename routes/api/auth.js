@@ -7,6 +7,6 @@ const {registrationAndLogin } = require('../../model/users/validation/auth');
 router.post('/registration', validation(registrationAndLogin), controllerWrapper(AuthController.registration));
 router.post('/login', validation(registrationAndLogin), controllerWrapper(AuthController.login));
 router.get('/logout', auth, controllerWrapper(AuthController.logout));
-router.patch('/balance', controllerWrapper(AuthController.balance))
+router.patch('/:id', auth, controllerWrapper(AuthController.balance));
 
 module.exports = router
