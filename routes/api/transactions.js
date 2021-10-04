@@ -14,7 +14,7 @@ router.post(
   validation(joiTransactionSchema), auth,
   controllerWrapper(TransactionController.addTransaction)
 );
-// router.get("/", auth, controllerWrapper(TransactionController.getAllTransactions));
+router.get("/", auth, controllerWrapper(TransactionController.getAllTransactions));
 router.delete("/:transactionId", controllerWrapper(TransactionController.delTransaction));
 
 
