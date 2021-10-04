@@ -7,7 +7,7 @@ const delCategory = async (req, res, next) => {
     return res.NOT_FOUND();
   }
   const category = await CategoryRepo.delCategory(categoryId);
-  return res.NO_CONTENT({ category });
+  return res.NoContent({ category });
 };
 
 module.exports = delCategory;
