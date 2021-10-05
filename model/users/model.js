@@ -1,4 +1,4 @@
-const {Schema, model, Types} = require('mongoose');
+const {Schema, model} = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const {emailRegex} = require('../../helpers/constants');
@@ -22,10 +22,6 @@ const usersSchema = new Schema(
 		balance: {
 			type: Number,
 			default: 0
-		},
-		owner: {
-			type: Types.ObjectId,
-			ref: "user"
 		}
 	},
 	{
