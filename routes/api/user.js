@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const AuthController = require('../../controllers/auth');
+const UserController = require('../../controllers/user');
 const {auth, controllerWrapper} = require('../../middlewares');
 
-router.patch('/:id', auth, controllerWrapper(AuthController.balance));
+router.patch('/', auth, controllerWrapper(UserController.balance));
 
 module.exports = router
