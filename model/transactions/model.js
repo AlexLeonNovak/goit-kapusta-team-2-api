@@ -6,20 +6,10 @@ const transactionSchema = Schema(
     datetime: {
       type: String,
     },
-    categoryId: {
-      // type: Types.ObjectId,
-      // ref: "categories",
-      required: true,
-      type: Object,
-
-    },
-
     category: {
-      // type: Types.ObjectId,
-      // ref: "categories",
-      // required: true,
-      type: Object,
-
+      type: Types.ObjectId,
+      ref: "categories",
+      required: true,
     },
   
     amount: {

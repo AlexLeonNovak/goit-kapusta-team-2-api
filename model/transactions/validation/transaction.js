@@ -3,8 +3,7 @@ const Joi = require("joi");
 const createTransaction = Joi.object({
     datetime: Joi.string().required(),
     description: Joi.string(),
-    category: Joi.object(),
-    categoryId: Joi.string().required(),
+    category: Joi.string().required(),
     amount: Joi.number().required(),
 });
 
