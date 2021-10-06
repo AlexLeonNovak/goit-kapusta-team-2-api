@@ -17,4 +17,8 @@ module.exports = class ErrorException extends Error {
 	static UnauthorizedError() {
 		return new this(401, 'User not authorized');
 	}
+
+	static ValidationError(errors) {
+		return new this(422, 'Validation error', errors)
+	}
 }
