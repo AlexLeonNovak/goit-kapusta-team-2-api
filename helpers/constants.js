@@ -11,5 +11,8 @@ module.exports = {
 		CONFLICT: 409,
 		INTERNAL_SERVER_ERROR: 500
 	},
-
+	categoryTypes: {
+		INCOME: 'income',
+		EXPENSE: 'expense'
+	}
 }

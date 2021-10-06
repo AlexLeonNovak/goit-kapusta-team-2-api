@@ -1,14 +1,17 @@
 const { Schema, Types, model } = require("mongoose");
 
+
 const transactionSchema = Schema(
   {
     datetime: {
       type: String,
     },
-    categoryId: {
-      type: String,
-      required: [true, "categoryId is required"],
+    category: {
+      type: Types.ObjectId,
+      ref: "categories",
+      required: true,
     },
+  
     amount: {
       type: Number,
       required: [true, "amount is required"],
@@ -16,7 +19,7 @@ const transactionSchema = Schema(
     description: {
       type: String,
     },
-    owner: {
+    user: {
       type: Types.ObjectId,
       ref: "user",
       required: true,
@@ -24,7 +27,6 @@ const transactionSchema = Schema(
   },
   { versionKey: false, timestamps: true }
 );
-
 const Transaction = model("transaction", transactionSchema);
 
 module.exports = Transaction;

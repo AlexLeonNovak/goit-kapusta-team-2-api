@@ -6,12 +6,13 @@ const {
   auth,
   controllerWrapper,
 } = require("../../middlewares");
-const joiTransactionSchema = require("../../model/transactions/validation/transaction");
+const createTransaction = require("../../model/transactions/validation/transaction");
 
 
 router.post(
   "/",
-  validation(joiTransactionSchema), auth,
+  auth,
+  validation(createTransaction), 
   controllerWrapper(TransactionController.addTransaction)
 );
 router.get("/", auth, controllerWrapper(TransactionController.getAllTransactions));

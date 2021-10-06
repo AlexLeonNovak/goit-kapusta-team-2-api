@@ -1,9 +1,9 @@
 const Category = require("../../model/categories/model");
 
-const updateContactById = async (categoryId) => {
+const delContactById = async (categoryId) => {
   return await Category.findByIdAndDelete(categoryId);
 };
 
-module.exports = updateContactById;
+module.exports = delContactById;
 
 

@@ -7,7 +7,6 @@ const emailSchema = Joi.string().email().pattern(new RegExp(emailRegex)).require
 const registrationAndLogin = Joi.object({
 	password: Joi.string().min(6).required(),
 	email: emailSchema,
-	balance:Joi.number()
 });
 
 module.exports = {

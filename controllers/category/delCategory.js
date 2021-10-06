@@ -1,12 +1,9 @@
 const CategoryRepo = require("../../repositories/category");
 
-const delCategory = async (req, res, next) => {
+const delCategory = async (req, res) => {
   const { categoryId } = req.params;
-  if (!categoryId) {
-    return res.NOT_FOUND();
-  }
-  const category = await CategoryRepo.delCategory(categoryId);
-  return res.NoContent({ category });
+  await CategoryRepo.delCategory(categoryId);
+  return res.NoContent();
 };
 
 module.exports = delCategory;
