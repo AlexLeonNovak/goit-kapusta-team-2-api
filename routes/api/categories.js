@@ -18,4 +18,7 @@ router.post(
 );
 router.get("/", auth, controllerWrapper(CategoryController.getAllCategories));
 
+router.delete("/:categoryId", controllerWrapper(CategoryController.delCategory));
+
+
 module.exports = router;
