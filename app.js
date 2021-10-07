@@ -21,11 +21,11 @@ app.use(responseMethods);
 
 app.use('/', routes);
 
-app.use((_,__, next) => next(ErrorException.NotFound))
+app.use((_,__, next) => next(ErrorException.NotFound()))
 
-app.use((err, req, res, next) => {
+app.use((err, req, res, _) => {
   let statusCode = err.status || 500;
-  if (err instanceof multer.MulterError) {
+  if (err instanceof multer.MulterError) { //|| CastError
     statusCode = 400;
   }
   res.status(statusCode).json({

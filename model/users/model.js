@@ -22,7 +22,7 @@ const usersSchema = new Schema(
 		balance: { 
 			type: Number, 
 			default: 0 
-		   }, 
+		}, 
 	},
 	{
 		versionKey: false,

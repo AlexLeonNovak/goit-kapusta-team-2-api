@@ -5,6 +5,6 @@ module.exports = (schema) => async (req, res, next) => {
 		await schema.validateAsync(req.body, {abortEarly: false});
 		return next();
 	} catch (e) {
-		next(ErrorException.BadRequest('Validation error', e.details))
+		next(ErrorException.ValidationError(e.details))
 	}
 }
