@@ -1,27 +1,24 @@
 const Transaction = require("../../model/transactions/model");
-const User = require('../../model/users/model'); 
 const {categoryTypes} = require('../../helpers/constants');
 
 const addTransaction = async (dataTransaction) => {
 
   let transaction = await Transaction.create(dataTransaction);
-  transaction = await Transaction.findOne({_id: transaction._id})
-    .populate('categories');
+  transaction = await transaction
+    .populate('category')
+    .populate({ path:'user', select: '-accessToken -passwordHash'})
+    .execPopulate();
 
-  const user = await User.findOne({_id: dataTransaction.user});
-console.log(dataTransaction.amount);
-console.log(user.balance);
+  console.log(transaction.user.balance);
+
   if (transaction.category.type === categoryTypes.INCOME) {
-    user.balance += dataTransaction.amount;
+    transaction.user.balance += transaction.amount;
   } else {
-    user.balance -= dataTransaction.amount;
+    transaction.user.balance -= transaction.amount;
   }
-  await user.save();
+  await transaction.user.save();
 
-  return {
-    transaction,
-    userBalance: user.balance
-  }
+  return transaction;
 
 };
 

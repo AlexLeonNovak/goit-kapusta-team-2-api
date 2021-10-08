@@ -366,6 +366,7 @@
                 "tags": [
                     "Transactions"
                 ],
+                "summary": "Get all transactions",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -581,6 +582,10 @@
             "Category": {
                 "type": "object",
                 "properties": {
+                    "_id": {
+                        "type": "string",
+                        "example": "61608834c7291823784947c6"
+                    },
                     "logo": {
                         "type": "string",
                         "example": "https://example.com/categories/logo1.png"
@@ -593,12 +598,24 @@
                         "type": "string",
                         "enum": ["income", "expense"],
                         "example": "income"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "example": "2021-10-08T18:04:36.111Z"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "example": "2021-10-08T18:04:36.111Z"
                     }
                 }
             },
             "Transaction": {
                 "type": "object",
                 "properties": {
+                    "_id": {
+                        "type": "string",
+                        "example": "61608834c7291823784947c6"
+                    },
                     "description": {
                         "type": "string",
                         "example": "Bread, eggs"
@@ -607,19 +624,24 @@
                         "type": "number",
                         "example": "230"
                     },
+                    "datetime": {
+                        "type": "string",
+                        "example": "2021-10-02 12:15:23"
+                    },
                     "category": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "$ref": "#/components/schemas/Category"
-                        }
+                        "$ref": "#/components/schemas/Category"
                     },
                     "user": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "$ref": "#/components/schemas/UserInfo"
-                        }
+                        "$ref": "#/components/schemas/UserInfo"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "example": "2021-10-08T18:04:36.111Z"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "example": "2021-10-08T18:04:36.111Z"
                     }
-
                 }
             },
             "TransactionsRequest": {
@@ -638,8 +660,21 @@
                         "properties": {
                             "transactions": {
                                 "type": "array",
-                                "additionalProperties": {
-                                    "$ref": "#/components/schemas/Transaction"
+                                "items": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Transaction"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "user": {
+                                                    "type": "string",
+                                                    "example": "615f49f7798e361978b1ebfd"
+                                                }
+                                            }
+                                        }
+                                    ]
                                 }
                             }
                         }
@@ -660,11 +695,8 @@
                     "data": {
                         "type": "object",
                         "properties": {
-                            "transactions": {
-                                "type": "object",
-                                "additionalProperties": {
-                                    "$ref": "#/components/schemas/Transaction"
-                                }
+                            "transaction": {
+                                "$ref": "#/components/schemas/Transaction"
                             }
                         }
                     }
