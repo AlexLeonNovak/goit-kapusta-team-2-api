@@ -3,14 +3,14 @@ const Transaction = require("../../model/transactions/model");
 const getAllTransactions = async (user, query) => {
     const currentDate = new Date();
     let {
-        limit = 0,
+        // limit = 0,
         offset = 0,
         month = currentDate.getMonth() + 1,
         year = currentDate.getFullYear(),
         sort = 'DESC'
     } = query;
 
-    limit = Number(limit);
+    // limit = Number(limit);
     offset = Number(offset);
     month = ('0' + month).slice(-2);
     year = Number(year);
@@ -52,7 +52,7 @@ const getAllTransactions = async (user, query) => {
                 meta: [ { $count: 'total' }],
                 data: [
                     { $skip: offset },
-                    { $limit: limit }
+                    // { $limit: limit }
                 ]
             }
         },
@@ -63,7 +63,7 @@ const getAllTransactions = async (user, query) => {
         total: meta[0]?.total || 0,
         month,
         year,
-        limit,
+        // limit,
         offset,
     }
 };
