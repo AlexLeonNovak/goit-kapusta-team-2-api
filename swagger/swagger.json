@@ -366,6 +366,51 @@
                 "tags": [
                     "Transactions"
                 ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "type": "number",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "schema": {
+                            "type": "number",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "year",
+                        "description": "If this field is empty, the current year is set by default",
+                        "schema": {
+                            "type": "number",
+                            "example": 2021
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "month",
+                        "description": "If this field is empty, the current month is set by default",
+                        "schema": {
+                            "type": "string",
+                            "example": "10"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "sort",
+                        "schema": {
+                            "type": "string",
+                            "default": "DESC",
+                            "enum": ["DESC", "ASC"]
+                        }
+                    }
+                ],
                 "summary": "Get all transactions",
                 "responses": {
                     "200": {
@@ -678,6 +723,26 @@
                                 }
                             }
                         }
+                    },
+                    "total": {
+                        "type": "number",
+                        "example": 200
+                    },
+                    "limit": {
+                        "type": "number",
+                        "example": 20
+                    },
+                    "offset": {
+                        "type": "number",
+                        "example": 60
+                    },
+                    "year": {
+                        "type": "number",
+                        "example": 2021
+                    },
+                    "month": {
+                        "type": "string",
+                        "example": "05"
                     }
                 }
             },
