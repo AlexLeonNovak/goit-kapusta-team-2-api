@@ -7,3 +7,4 @@ const { updateBalance } = require('../../model/users/validation/updateBalance')
 router.patch('/', auth, validation(updateBalance), controllerWrapper(UserController.balance));
 router.get('/current', auth, controllerWrapper(UserController.currentUser));
 
+module.exports = router;

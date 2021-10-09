@@ -12,13 +12,10 @@ const createTransaction = require("../../model/transactions/validation/transacti
 router.post(
   "/",
   auth,
-  validation(createTransaction), 
+  validation(createTransaction),
   controllerWrapper(TransactionController.addTransaction)
 );
 router.get("/", auth, controllerWrapper(TransactionController.getAllTransactions));
 router.delete("/:transactionId", controllerWrapper(TransactionController.delTransaction));
-
-
-
 
 module.exports = router;
