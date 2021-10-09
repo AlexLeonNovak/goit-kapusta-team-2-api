@@ -11,7 +11,6 @@ const transactionSchema = Schema(
       ref: "categories",
       required: true,
     },
-  
     amount: {
       type: Number,
       required: [true, "amount is required"],
@@ -21,7 +20,7 @@ const transactionSchema = Schema(
     },
     user: {
       type: Types.ObjectId,
-      ref: "user",
+      ref: "users",
       required: true,
     },
   },

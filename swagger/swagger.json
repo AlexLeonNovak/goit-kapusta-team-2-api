@@ -1,0 +1,779 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "version": "1.0.0",
+        "title": "Kapusta smart finance API",
+        "description": "API documentation for final project GoIT#28 Team 2. [Backend repo](https://github.com/AlexLeonNovak/goit-kapusta-team-2-api)",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth endpoints"
+        },
+        {
+            "name": "User",
+            "description": "User data"
+        },
+        {
+            "name": "Categories",
+            "description": "Category endpoints"
+        },
+        {
+            "name": "Transactions",
+            "description": "Transactions endpoints"
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://goit-kapusta-team-2-api.herokuapp.com/api/v1/",
+            "description": "API server"
+        }
+    ],
+    "paths": {
+        "/auth/registration": {
+            "post": {
+                "tags": ["Auth"],
+                "summary": "User registration",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserLoginAndRegister"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserRegistered"
+                                }
+                            }
+                        },
+                        "description": "Success registered"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequest"
+                                }
+                            }
+                        },
+                        "description": "Bad request error"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": ["Auth"],
+                "summary": "User authorization",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserLoginAndRegister"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserRegistered"
+                                }
+                            }
+                        },
+                        "description": "Success login"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequest"
+                                }
+                            }
+                        },
+                        "description": "Bad request error"
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "get": {
+                "security": [{ "Bearer": [] }],
+                "tags": ["Auth"],
+                "summary": "User logout",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequest"
+                                }
+                            }
+                        },
+                        "description": "Bad request error"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "patch": {
+                "security": [{ "Bearer": [] }],
+                "tags": ["User"],
+                "summary": "Update balance",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                           "schema": {
+                               "type": "object",
+                               "properties": {
+                                   "balance": {
+                                       "type": "number",
+                                       "example": 500
+                                   }
+                               }
+                           }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserData"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/user/current": {
+            "get": {
+                "security": [{ "Bearer": [] }],
+                "tags": ["User"],
+                "summary": "Get current user",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserData"
+                                }
+                            }
+                        },
+                        "description": "Success logout"
+                    }
+                }
+            }
+        },
+        "/categories": {
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "tags": [
+                    "Categories"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "logo": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Category name"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "income",
+                                            "expense"
+                                        ],
+                                        "example": "income"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CategoryRequest"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequest"
+                                }
+                            }
+                        },
+                        "description": "Bad request error"
+                    }
+                }
+            },
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "tags": [
+                    "Categories"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CategoriesRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/categories/{id}": {
+            "delete": {
+                "security": [{ "Bearer": [] }],
+                "tags": ["Categories"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "description": "ID of category"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success deleted"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequest"
+                                }
+                            }
+                        },
+                        "description": "Bad request error"
+                    }
+                }
+            }
+        },
+        "/transactions": {
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "tags": [
+                    "Transactions"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Bread, eggs"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "description": "Category ID",
+                                        "example": "615f49f77a8e361978b1ebfd"
+                                    },
+                                    "amount": {
+                                        "type": "number",
+                                        "example": "230"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionRequest"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequest"
+                                }
+                            }
+                        },
+                        "description": "Bad request error"
+                    }
+                }
+            },
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "tags": [
+                    "Transactions"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "type": "number",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "schema": {
+                            "type": "number",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "year",
+                        "description": "If this field is empty, the current year is set by default",
+                        "schema": {
+                            "type": "number",
+                            "example": 2021
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "month",
+                        "description": "If this field is empty, the current month is set by default",
+                        "schema": {
+                            "type": "string",
+                            "example": "10"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "sort",
+                        "schema": {
+                            "type": "string",
+                            "default": "DESC",
+                            "enum": ["DESC", "ASC"]
+                        }
+                    }
+                ],
+                "summary": "Get all transactions",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionsRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/transactions/{id}": {
+            "delete": {
+                "security": [{ "Bearer": [] }],
+                "tags": ["Transactions"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "description": "ID of transaction"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success deleted"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequest"
+                                }
+                            }
+                        },
+                        "description": "Bad request error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BadRequest": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "example": "error"
+                    },
+                    "code": {
+                        "type": "number",
+                        "example": 400
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Error message"
+                    },
+                    "errors": {
+                        "type": "array",
+                        "example": []
+                    }
+                }
+            },
+            "UserLoginAndRegister": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "user@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "passwd123"
+                    }
+                }
+            },
+            "UserRegistered": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "default": "success"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "default": 201
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "user": {
+                                "$ref": "#/components/schemas/UserInfo"
+                            }
+                        }
+                    }
+                }
+            },
+            "UserLoggedIn": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "default": "success"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "default": 200
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "user": {
+                                "$ref": "#/components/schemas/UserInfo"
+                            },
+                            "accessToken": {
+                                "type": "string",
+                                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwic3RhdHVzIjoid2FpdCIsImlhdCI6MTYzMDkxODUzMCwiZXhwIjoxNjMwOTIwMzMwfQ.XAJxWXLL_g8uUfgM1irtAn8jKOf-9K_wT58qqi9Ihcw"
+                            }
+                        }
+                    }
+                }
+            },
+            "UserData": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "default": "success"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "default": 200
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "user": {
+                                "$ref": "#/components/schemas/UserInfo"
+                            }
+                        }
+                    }
+                }
+            },
+            "UserInfo": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "sd045kk0k0-rk"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "user@example.com"
+                    },
+                    "balance": {
+                        "type": "integer",
+                        "example": 5000
+                    }
+                }
+            },
+            "CategoryRequest": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "default": "success"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "default": 201
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "category": {
+                                "type": "object",
+                                "additionalProperties": {
+                                    "$ref": "#/components/schemas/Category"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "CategoriesRequest": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "default": "success"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "default": 200
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "categories": {
+                                "type": "array",
+                                "additionalProperties": {
+                                    "$ref": "#/components/schemas/Category"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Category": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "example": "61608834c7291823784947c6"
+                    },
+                    "logo": {
+                        "type": "string",
+                        "example": "https://example.com/categories/logo1.png"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Category"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": ["income", "expense"],
+                        "example": "income"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "example": "2021-10-08T18:04:36.111Z"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "example": "2021-10-08T18:04:36.111Z"
+                    }
+                }
+            },
+            "Transaction": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "example": "61608834c7291823784947c6"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "Bread, eggs"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "example": "230"
+                    },
+                    "datetime": {
+                        "type": "string",
+                        "example": "2021-10-02 12:15:23"
+                    },
+                    "category": {
+                        "$ref": "#/components/schemas/Category"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/UserInfo"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "example": "2021-10-08T18:04:36.111Z"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "example": "2021-10-08T18:04:36.111Z"
+                    }
+                }
+            },
+            "TransactionsRequest": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "default": "success"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "default": 200
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "transactions": {
+                                "type": "array",
+                                "items": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Transaction"
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "user": {
+                                                    "type": "string",
+                                                    "example": "615f49f7798e361978b1ebfd"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "total": {
+                        "type": "number",
+                        "example": 200
+                    },
+                    "limit": {
+                        "type": "number",
+                        "example": 20
+                    },
+                    "offset": {
+                        "type": "number",
+                        "example": 60
+                    },
+                    "year": {
+                        "type": "number",
+                        "example": 2021
+                    },
+                    "month": {
+                        "type": "string",
+                        "example": "05"
+                    }
+                }
+            },
+            "TransactionRequest": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "default": "success"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "default": 201
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "transaction": {
+                                "$ref": "#/components/schemas/Transaction"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}

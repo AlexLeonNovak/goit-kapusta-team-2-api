@@ -13,6 +13,7 @@ const {
 
 router.post(
   "/",
+  auth,
   uploadFile.single("logo"), validation(joiCategorySchema),
   controllerWrapper(CategoryController.addCategory)
 );
