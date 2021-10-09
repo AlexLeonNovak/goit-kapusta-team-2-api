@@ -50,13 +50,14 @@ const getAllTransactions = async (user, query) => {
         {
             $facet: {
                 meta: [ { $count: 'total' }],
-                data: [
+                data: limit ? [
                     { $skip: offset },
                     { $limit: limit }
-                ]
+                ] : []
             }
         },
     ]);
+
     const {data: transactions, meta } = transAggregate[0];
     return {
         transactions,

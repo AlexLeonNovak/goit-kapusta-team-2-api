@@ -3,6 +3,7 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 const multer = require('multer');
+const {mongo} = require('mongoose');
 const ErrorException = require('./exceptions/error.exception');
 
 const routes = require('./routes')
@@ -24,8 +25,11 @@ app.use('/', routes);
 app.use((_,__, next) => next(ErrorException.NotFound()))
 
 app.use((err, req, res, _) => {
+  console.log(err);
   let statusCode = err.status || 500;
-  if (err instanceof multer.MulterError) { //|| CastError
+  if (err instanceof multer.MulterError
+    || err instanceof mongo.MongoError
+  ) { //|| CastError
     statusCode = 400;
   }
   res.status(statusCode).json({
