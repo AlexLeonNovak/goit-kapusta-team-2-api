@@ -8,4 +8,6 @@ router.post('/registration', validation(registrationAndLogin), controllerWrapper
 router.post('/login', validation(registrationAndLogin), controllerWrapper(AuthController.login));
 router.get('/logout', auth, controllerWrapper(AuthController.logout));
 
+router.post('/google', controllerWrapper(AuthController.google))
+
 module.exports = router
