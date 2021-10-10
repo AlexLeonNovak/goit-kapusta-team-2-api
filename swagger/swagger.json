@@ -91,7 +91,51 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/UserRegistered"
+                                    "$ref": "#/components/schemas/UserLoggedIn"
+                                }
+                            }
+                        },
+                        "description": "Success login"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequest"
+                                }
+                            }
+                        },
+                        "description": "Bad request error"
+                    }
+                }
+            }
+        },
+        "/auth/google": {
+            "post": {
+                "tags": ["Auth"],
+                "summary": "User authorization",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "tokenId": {
+                                        "type": "string",
+                                        "description": "Google token ID"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserLoggedIn"
                                 }
                             }
                         },
