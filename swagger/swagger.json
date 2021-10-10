@@ -721,28 +721,28 @@
                                         }
                                     ]
                                 }
+                            },
+                            "total": {
+                                "type": "number",
+                                "example": 200
+                            },
+                            "limit": {
+                                "type": "number",
+                                "example": 20
+                            },
+                            "offset": {
+                                "type": "number",
+                                "example": 60
+                            },
+                            "year": {
+                                "type": "number",
+                                "example": 2021
+                            },
+                            "month": {
+                                "type": "string",
+                                "example": "05"
                             }
                         }
-                    },
-                    "total": {
-                        "type": "number",
-                        "example": 200
-                    },
-                    "limit": {
-                        "type": "number",
-                        "example": 20
-                    },
-                    "offset": {
-                        "type": "number",
-                        "example": 60
-                    },
-                    "year": {
-                        "type": "number",
-                        "example": 2021
-                    },
-                    "month": {
-                        "type": "string",
-                        "example": "05"
                     }
                 }
             },

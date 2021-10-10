@@ -3,14 +3,14 @@ const Transaction = require("../../model/transactions/model");
 const getAllTransactions = async (user, query) => {
     const currentDate = new Date();
     let {
-        // limit = 0,
+        limit = 0,
         offset = 0,
         month = currentDate.getMonth() + 1,
         year = currentDate.getFullYear(),
         sort = 'DESC'
     } = query;
 
-    // limit = Number(limit);
+    limit = Number(limit);
     offset = Number(offset);
     month = ('0' + month).slice(-2);
     year = Number(year);
@@ -50,20 +50,21 @@ const getAllTransactions = async (user, query) => {
         {
             $facet: {
                 meta: [ { $count: 'total' }],
-                data: [
+                data: limit ? [
                     { $skip: offset },
-                    // { $limit: limit }
-                ]
+                    { $limit: limit }
+                ] : []
             }
         },
     ]);
+
     const {data: transactions, meta } = transAggregate[0];
     return {
         transactions,
         total: meta[0]?.total || 0,
         month,
         year,
-        // limit,
+        limit,
         offset,
     }
 };
