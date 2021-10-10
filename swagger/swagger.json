@@ -422,6 +422,16 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequest"
+                                }
+                            }
+                        },
+                        "description": "Bad request error"
                     }
                 }
             }
@@ -441,6 +451,41 @@
                 "responses": {
                     "204": {
                         "description": "Success deleted"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequest"
+                                }
+                            }
+                        },
+                        "description": "Bad request error"
+                    }
+                }
+            }
+        },
+        "/transactions/summary": {
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Get transactions summary grouped by year and month",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionsSummaryRequest"
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "content": {
@@ -762,6 +807,48 @@
                         "properties": {
                             "transaction": {
                                 "$ref": "#/components/schemas/Transaction"
+                            }
+                        }
+                    }
+                }
+            },
+            "TransactionsSummaryRequest": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "default": "success"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "default": 200
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "summary": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "year": {
+                                            "type": "number",
+                                            "example": 2021
+                                        },
+                                        "month": {
+                                            "type": "number",
+                                            "example": 8
+                                        },
+                                        "income": {
+                                            "type": "number",
+                                            "example": 55000
+                                        },
+                                        "expense": {
+                                            "type": "number",
+                                            "example": 44259
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

@@ -39,13 +39,7 @@ const getAllTransactions = async (user, query) => {
                 as: "category"
             }
         },
-        {
-            $set: {
-                category: {
-                    $arrayElemAt: [ '$category', 0 ]
-                },
-            }
-        },
+        { $unwind: '$category' },
         { $sort: { datetime: sort.toUpperCase() === 'DESC' ? -1 : 1 } },
         {
             $facet: {
