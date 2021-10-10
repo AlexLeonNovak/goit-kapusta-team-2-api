@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
 const categorySchema = Schema(
   {
@@ -13,6 +13,11 @@ const categorySchema = Schema(
     logo: {
       type: String,
       default: "",
+    },
+     user: {
+      type: Types.ObjectId,
+      ref: "user",
+      required: true,
     },
   },
   { versionKey: false, timestamps: true }

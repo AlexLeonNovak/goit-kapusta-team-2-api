@@ -3,10 +3,11 @@ const path = require("path");
 const Category = require("../../model/categories/model");
 const { categoriesDir } = require("../../helpers/directories");
 
-const addCategory = async (name, type, tempPath, filename) => {
+const addCategory = async (name, type, tempPath, filename, id) => {
   const category = new Category({ name, type });
   const logoName = `${category._id}_${filename}`;
   const logo = `categories/${logoName}`;
+  
 
   try {
     await fs.rename(tempPath, path.join(categoriesDir, logoName));
@@ -15,6 +16,7 @@ const addCategory = async (name, type, tempPath, filename) => {
     throw err;
   }
   category.logo = logo;
+  category.user = id;
   await category.save();
 
   return category;

@@ -1,7 +1,7 @@
 const CategoryRepo = require("../../repositories/category");
 
-const getAllCategories = async (__, res) => {
-  const categories = await CategoryRepo.getAllCategories();
+const getAllCategories = async (req, res) => {
+  const categories = await CategoryRepo.getAllCategories(req.user.id);
   return res.OK({categories});
 };
 
