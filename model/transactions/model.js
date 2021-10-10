@@ -4,7 +4,7 @@ const { Schema, Types, model } = require("mongoose");
 const transactionSchema = Schema(
   {
     datetime: {
-      type: String,
+      type: Date,
     },
     category: {
       type: Types.ObjectId,

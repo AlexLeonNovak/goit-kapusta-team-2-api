@@ -16,7 +16,8 @@ router.post(
   controllerWrapper(TransactionController.addTransaction)
 );
 router.get("/", auth, controllerWrapper(TransactionController.getAllTransactions));
-router.delete("/:transactionId", controllerWrapper(TransactionController.delTransaction));
+router.get("/summary", auth, controllerWrapper(TransactionController.getTransactionSummary));
+router.delete("/:transactionId", auth, controllerWrapper(TransactionController.delTransaction));
 router.get("/:transactionDate", auth, controllerWrapper(TransactionController.getTransactionByDate));
 
 
