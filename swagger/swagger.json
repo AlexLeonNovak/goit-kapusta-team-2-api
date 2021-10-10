@@ -677,13 +677,9 @@
                         "default": 201
                     },
                     "data": {
-                        "type": "object",
                         "properties": {
                             "category": {
-                                "type": "object",
-                                "additionalProperties": {
-                                    "$ref": "#/components/schemas/Category"
-                                }
+                                "$ref": "#/components/schemas/Category"
                             }
                         }
                     }
@@ -705,7 +701,7 @@
                         "properties": {
                             "categories": {
                                 "type": "array",
-                                "additionalProperties": {
+                                "items": {
                                     "$ref": "#/components/schemas/Category"
                                 }
                             }
@@ -828,8 +824,8 @@
                                 "example": 2021
                             },
                             "month": {
-                                "type": "string",
-                                "example": "05"
+                                "type": "number",
+                                "example": 8
                             }
                         }
                     }
