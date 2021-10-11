@@ -1,57 +1,67 @@
 [
   {
-    "logo": "public/categories/svg_black/c1.svg",
+    "logo": "categories/svg_black/c1.svg",
     "name": "Продукты",
     "type": "expense"
   },
   {
-    "logo": "public/categories/svg_black/c2.svg",
+    "logo": "categories/svg_black/c2.svg",
     "name": "Алкоголь",
     "type": "expense"
   },
   {
-    "logo": "public/categories/svg_black/c3.svg",
+    "logo": "categories/svg_black/c3.svg",
     "name": "Развлечение",
     "type": "expense"
   },
   {
-    "logo": "public/categories/svg_black/c4.svg",
+    "logo": "categories/svg_black/c4.svg",
     "name": "Здоровье",
     "type": "expense"
   },
   {
-    "logo": "public/categories/svg_black/c5.svg",
+    "logo": "categories/svg_black/c5.svg",
     "name": "Транспорт",
     "type": "expense"
   },
   {
-    "logo": "public/categories/svg_black/c6.svg",
+    "logo": "categories/svg_black/c6.svg",
     "name": "Все для дома",
     "type": "expense"
   },
   {
-    "logo": "public/categories/svg_black/c7.svg",
+    "logo": "categories/svg_black/c7.svg",
     "name": "Техника",
     "type": "expense"
   },
   {
-    "logo": "public/categories/svg_black/c8.svg",
+    "logo": "categories/svg_black/c8.svg",
     "name": "Комуналка, связь",
     "type": "expense"
   },
   {
-    "logo": "public/categories/svg_black/c9.svg",
+    "logo": "categories/svg_black/c9.svg",
     "name": "Спорт, хобби",
     "type": "expense"
   },
   {
-    "logo": "public/categories/svg_black/c10.svg",
+    "logo": "categories/svg_black/c10.svg",
     "name": "Образование",
     "type": "expense"
   },
   {
-    "logo": "public/categories/svg_black/c11.svg",
+    "logo": "categories/svg_black/c11.svg",
     "name": "Прочее",
     "type": "expense"
+  },
+  {
+    "logo": "categories/svg_black/c12.svg",
+    "name": "ЗП",
+    "type": "income"
+  },
+  {
+    "logo": "categories/svg_black/c13.svg",
+    "name": "Доп.доход",
+    "type": "income"
   }
 ]
