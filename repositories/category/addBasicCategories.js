@@ -2,10 +2,7 @@ const basicCategories = require("../../helpers/basicСategories.json");
 const Category = require("../../model/categories/model");
 
 const addBasicCategories = async (id) => {
-  const categories = Category.collection.initializeOrderedBulkOp();
-  basicCategories.forEach((basicCategorie) => {
-    categories.insert({ ...basicCategorie, user: id });
-  });
-  await categories.execute();
+  const defaultCats = basicCategories.map(item => ({...item, user: id}));
+  await Category.create(defaultCats);
 };
 module.exports = addBasicCategories;
