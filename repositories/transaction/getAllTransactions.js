@@ -16,7 +16,7 @@ const getAllTransactions = async (user, query) => {
     year = Number(year);
 
     const matchDate = new Date(year, month);
-
+    console.log('matchDate', matchDate.toDateString())
     // const transactions = await Transaction.find({
     //     user,
     //     datetime: { $regex: `${year}-${month}.*`}
@@ -64,7 +64,7 @@ const getAllTransactions = async (user, query) => {
             }
         },
     ]);
-
+    console.log('transAggregate', transAggregate);
     const {data: transactions, meta } = transAggregate[0];
     return {
         transactions,
