@@ -15,7 +15,7 @@ const getAllTransactions = async (user, query) => {
     month = Number(month);
     year = Number(year);
 
-    const matchDate = new Date(Date.UTC(year, month - 1));
+    const matchDate = new Date(year, month - 1);
     console.log('matchDate', matchDate.toUTCString())
     const d = new Date("2021-10-12T07:10:54.382Z")
     console.log('test date', d.toUTCString());
