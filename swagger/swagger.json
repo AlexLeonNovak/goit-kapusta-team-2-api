@@ -353,6 +353,7 @@
                 "tags": [
                     "Transactions"
                 ],
+                "summary": "Create new transaction",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -363,6 +364,10 @@
                                     "description": {
                                         "type": "string",
                                         "example": "Bread, eggs"
+                                    },
+                                    "datetime": {
+                                        "type": "string",
+                                        "example": "2021-10-02 12:56:34"
                                     },
                                     "category": {
                                         "type": "string",
@@ -482,6 +487,7 @@
         },
         "/transactions/{id}": {
             "delete": {
+                "summary": "Delete transaction",
                 "security": [{ "Bearer": [] }],
                 "tags": ["Transactions"],
                 "parameters": [
