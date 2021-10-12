@@ -15,24 +15,8 @@ const getAllTransactions = async (user, query) => {
     month = Number(month);
     year = Number(year);
 
-    const matchDate = new Date(year, month - 1);
-    console.log('matchDate', matchDate.toUTCString())
-    const d = new Date("2021-10-12T07:10:54.382Z")
-    console.log('test date', d.toUTCString());
-    // const transactions = await Transaction.find({
-    //     user,
-    //     datetime: { $regex: `${year}-${month}.*`}
-    // })
-    //   .populate('category')
-    //   .skip(Number(offset))
-    //   .limit(Number(limit))
-    // ;
-    //
-    // const total = await Transaction.find({
-    //     user,
-    //     datetime: { $regex: `${year}-${month}.*`}
-    // }).count();
-    console.log(user);
+    const matchDate = new Date(Date.UTC(year, month - 1));
+
     const transAggregate = await Transaction.aggregate([
         {
             $match: {
@@ -66,7 +50,7 @@ const getAllTransactions = async (user, query) => {
             }
         },
     ]);
-    console.log('transAggregate', transAggregate);
+
     const {data: transactions, meta } = transAggregate[0];
     return {
         transactions,
