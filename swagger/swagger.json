@@ -31,6 +31,10 @@
         {
             "url": "https://goit-kapusta-team-2-api.herokuapp.com/api/v1/",
             "description": "API server"
+        },
+        {
+            "url": "http://localhost:5000/api/v1",
+            "description": "Local test server"
         }
     ],
     "paths": {
