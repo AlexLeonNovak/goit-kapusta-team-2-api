@@ -15,10 +15,10 @@ const getAllTransactions = async (user, query) => {
     month = Number(month);
     year = Number(year);
 
-    const matchDate = new Date(year, month - 1, 2);
-    console.log('matchDate', matchDate.toString())
+    const matchDate = new Date(Date.UTC(year, month - 1));
+    console.log('matchDate', matchDate.toUTCString())
     const d = new Date("2021-10-12T07:10:54.382Z")
-    console.log('test date', d.toString());
+    console.log('test date', d.toUTCString());
     // const transactions = await Transaction.find({
     //     user,
     //     datetime: { $regex: `${year}-${month}.*`}
