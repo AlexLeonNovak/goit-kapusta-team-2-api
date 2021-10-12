@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
@@ -12,8 +13,8 @@ const app = express()
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 
+app.use(express.static(path.resolve(__dirname, process.env.UPLOAD_DIR)))
 app.use(logger(formatsLogger))
-app.use(express.static(process.env.UPLOAD_DIR))
 app.use(cors())
 app.use(express.json())
 
