@@ -17,6 +17,8 @@ const getAllTransactions = async (user, query) => {
 
     const matchDate = new Date(year, month - 1, 2);
     console.log('matchDate', matchDate.toString())
+    const d = new Date("2021-10-12T07:10:54.382Z")
+    console.log('test date', d.toString());
     // const transactions = await Transaction.find({
     //     user,
     //     datetime: { $regex: `${year}-${month}.*`}
