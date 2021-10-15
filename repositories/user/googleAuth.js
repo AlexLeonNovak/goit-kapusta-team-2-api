@@ -23,16 +23,15 @@ const googleAuth = async (tokenId) => {
 		user = new User({email});
 		user.setPassword(password);
 		await user.save();
+		await addBasicCategories(user.id);
+
 	}
 
 	const userData = userDto(user);
 	const token = jwt.sign(userData, JWT_ACCESS_SECRET);
 	user.accessToken = token;
 	await user.save();
-	
-	await addBasicCategories(user.id);
-
-    
+	   
 	return {
 		user: userData,
 		token
