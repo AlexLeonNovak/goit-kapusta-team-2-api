@@ -13,9 +13,9 @@ const app = express()
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 
-app.use(express.static(path.resolve(__dirname, process.env.UPLOAD_DIR)))
 app.use(logger(formatsLogger))
 app.use(cors())
+app.use(express.static(path.resolve(__dirname, process.env.UPLOAD_DIR)))
 app.use(express.json())
 
 const {responseMethods} = require('./middlewares');
