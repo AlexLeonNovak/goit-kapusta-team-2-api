@@ -25,6 +25,9 @@
         {
             "name": "Transactions",
             "description": "Transactions endpoints"
+        },
+        {
+            "name": "Wallets"
         }
     ],
     "servers": [
@@ -182,6 +185,7 @@
         },
         "/user": {
             "patch": {
+                "deprecated": true,
                 "security": [{ "Bearer": [] }],
                 "tags": ["User"],
                 "summary": "Update balance",
@@ -236,6 +240,7 @@
         },
         "/categories": {
             "post": {
+                "summary": "Create category",
                 "security": [
                     {
                         "Bearer": []
@@ -296,6 +301,7 @@
                 }
             },
             "get": {
+                "summary": "Get all categories",
                 "security": [
                     {
                         "Bearer": []
@@ -322,6 +328,114 @@
             "delete": {
                 "security": [{ "Bearer": [] }],
                 "tags": ["Categories"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "description": "ID of category"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success deleted"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequest"
+                                }
+                            }
+                        },
+                        "description": "Bad request error"
+                    }
+                }
+            }
+        },
+        "/wallets": {
+            "post": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "tags": [
+                    "Wallets"
+                ],
+                "summary": "Create wallet",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Wallet name"
+                                    },
+                                    "balance": {
+                                        "type": "number",
+                                        "example": 10000
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WalletRequest"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BadRequest"
+                                }
+                            }
+                        },
+                        "description": "Bad request error"
+                    }
+                }
+            },
+            "get": {
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "tags": [
+                    "Wallets"
+                ],
+                "summary": "Get all wallets",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WalletsRequest"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/wallets/{id}": {
+            "delete": {
+                "security": [{ "Bearer": [] }],
+                "tags": ["Wallets"],
+                "summary": "Delete wallet",
                 "parameters": [
                     {
                         "name": "id",
@@ -515,6 +629,44 @@
                             }
                         },
                         "description": "Bad request error"
+                    }
+                }
+            },
+            "patch": {
+                "security": [{ "Bearer": [] }],
+                "tags": ["Wallets"],
+                "summary": "Update balance",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "balance": {
+                                        "type": "number",
+                                        "example": 500,
+                                        "required": true
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "New wallet name",
+                                        "required": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WalletRequest"
+                                }
+                            }
+                        },
+                        "description": "Success"
                     }
                 }
             }
@@ -726,6 +878,10 @@
                         "type": "string",
                         "example": "61608834c7291823784947c6"
                     },
+                    "user": {
+                        "type": "string",
+                        "example": "61608834c7291823784947c6"
+                    },
                     "logo": {
                         "type": "string",
                         "example": "https://example.com/categories/logo1.png"
@@ -773,6 +929,9 @@
                     },
                     "user": {
                         "$ref": "#/components/schemas/UserInfo"
+                    },
+                    "wallet": {
+                        "$ref": "#/components/schemas/Wallet"
                     },
                     "createdAt": {
                         "type": "string",
@@ -898,6 +1057,80 @@
                                             "example": 44259
                                         }
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Wallet": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "example": "61608834c7291823784947c6"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Cash"
+                    },
+                    "balance": {
+                        "type": "number",
+                        "example": 10000
+                    },
+                    "user": {
+                        "type": "string",
+                        "example": "61608834c7291823784947c6"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "example": "2021-10-08T18:04:36.111Z"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "example": "2021-10-08T18:04:36.111Z"
+                    }
+                }
+            },
+            "WalletRequest": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "default": "success"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "default": 201
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "wallet": {
+                                "$ref": "#/components/schemas/Wallet"
+                            }
+                        }
+                    }
+                }
+            },
+            "WalletsRequest": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "default": "success"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "default": 200
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "wallets": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Wallet"
                                 }
                             }
                         }
