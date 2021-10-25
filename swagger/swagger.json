@@ -459,6 +459,44 @@
                         "description": "Bad request error"
                     }
                 }
+            },
+            "patch": {
+                "security": [{ "Bearer": [] }],
+                "tags": ["Wallets"],
+                "summary": "Update balance",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "balance": {
+                                        "type": "number",
+                                        "example": 500,
+                                        "required": true
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "New wallet name",
+                                        "required": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/WalletRequest"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                }
             }
         },
         "/transactions": {
@@ -629,44 +667,6 @@
                             }
                         },
                         "description": "Bad request error"
-                    }
-                }
-            },
-            "patch": {
-                "security": [{ "Bearer": [] }],
-                "tags": ["Wallets"],
-                "summary": "Update balance",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "balance": {
-                                        "type": "number",
-                                        "example": 500,
-                                        "required": true
-                                    },
-                                    "name": {
-                                        "type": "string",
-                                        "example": "New wallet name",
-                                        "required": false
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/WalletRequest"
-                                }
-                            }
-                        },
-                        "description": "Success"
                     }
                 }
             }
