@@ -1,6 +1,5 @@
 const { Schema, Types, model } = require("mongoose");
 
-
 const transactionSchema = Schema(
   {
     datetime: {
@@ -9,6 +8,11 @@ const transactionSchema = Schema(
     category: {
       type: Types.ObjectId,
       ref: "categories",
+      required: true,
+    },
+    wallet: {
+      type: Types.ObjectId,
+      ref: "wallets",
       required: true,
     },
     amount: {

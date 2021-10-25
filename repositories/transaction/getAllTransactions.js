@@ -39,6 +39,20 @@ const getAllTransactions = async (user, query) => {
             }
         },
         { $unwind: '$category' },
+
+        {
+            $lookup: {
+                from: "wallets",
+                localField: "wallet",
+                foreignField: "_id",
+                as: "wallet"
+            }
+        },
+        { $unwind: '$wallet' },
+
+
+
+
         { $sort: { datetime: sort.toUpperCase() === 'DESC' ? -1 : 1 } },
         {
             $facet: {
