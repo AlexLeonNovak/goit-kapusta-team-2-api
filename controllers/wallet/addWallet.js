@@ -1,12 +1,12 @@
 const WalletRepo = require("../../repositories/wallet");
 
 const addWallet = async (req, res) => {
-  const result = await WalletRepo.addWallet({
+  const wallet = await WalletRepo.addWallet({
     ...req.body,
     user: req.user.id,
   });
 
-  return res.Created({ result });
+  return res.Created({ wallet });
 };
 
 module.exports = addWallet;
