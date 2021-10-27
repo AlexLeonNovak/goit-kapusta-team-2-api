@@ -5,7 +5,7 @@ const { nanoid } = require('nanoid');
 const User = require('../../model/users/model');
 const userDto = require('../../dtos/user');
 const addBasicCategories = require("../category/addBasicCategories");
-
+const addBasicWallet = require('../wallet/addBasicWallet');
 
 const {GOOGLE_CLIENT_ID, JWT_ACCESS_SECRET} = process.env;
 
@@ -24,6 +24,7 @@ const googleAuth = async (tokenId) => {
 		user.setPassword(password);
 		await user.save();
 		await addBasicCategories(user.id);
+		await addBasicWallet(user.id)
 	}
 
 	const userData = userDto(user);

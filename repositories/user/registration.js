@@ -2,6 +2,7 @@ const User = require("../../model/users/model");
 const ErrorException = require("../../exceptions/error.exception");
 const userDto = require("../../dtos/user");
 const addBasicCategories = require("../category/addBasicCategories");
+const { addBasicWallet } = require("../wallet");
 
 const registration = async (email, password) => {
   const candidate = await User.findOne({ email });
@@ -13,6 +14,7 @@ const registration = async (email, password) => {
   await user.save();
 
   await addBasicCategories(user.id);
+  await addBasicWallet(user.id);
 
   return userDto(user);
 };
