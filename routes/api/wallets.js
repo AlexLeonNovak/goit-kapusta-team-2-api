@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const WalletsController = require("../../controllers/wallet");
-const { validation, auth, controllerWrapper, checkWalletData } = require("../../middlewares");
+const updateWalletData = require('../../model/wallets/validation/updateWalletData')
+const { validation, auth, controllerWrapper} = require("../../middlewares");
 const createWallet = require("../../model/wallets/validation/wallet");
 
 router.post(
@@ -12,6 +13,6 @@ router.post(
 );
 router.get("/", auth, controllerWrapper(WalletsController.getWallets));
 router.delete("/:id", auth, controllerWrapper(WalletsController.delWallet));
-router.patch("/:id", auth, checkWalletData, controllerWrapper(WalletsController.updateWallet));
+router.patch("/:id", auth, validation(updateWalletData), controllerWrapper(WalletsController.updateWallet));
 
 module.exports = router;
