@@ -10,12 +10,13 @@ const addTransaction = async (dataTransaction) => {
     .populate({ path:'user', select: '-accessToken -passwordHash'})
     .execPopulate();
 
+
   if (transaction.category.type === categoryTypes.INCOME) {
-    transaction.user.balance += transaction.amount;
+    transaction.wallet.balance += transaction.amount;
   } else {
-    transaction.user.balance -= transaction.amount;
+    transaction.wallet.balance -= transaction.amount;
   }
-  await transaction.user.save();
+  await transaction.wallet.save();
 
   return transaction;
 
