@@ -2,7 +2,7 @@ const Transaction = require("../../model/transactions/model");
 const {categoryTypes} = require('../../helpers/constants');
 
 const delTransaction = async (transactionId) => {
-  const transaction = await Transaction.findByIdAndDelete(transactionId)
+  const transaction = await Transaction.findById(transactionId)
     .populate('wallet');
 
   if (transaction.category.type === categoryTypes.INCOME) {
@@ -11,7 +11,7 @@ const delTransaction = async (transactionId) => {
     transaction.wallet.balance += transaction.amount;
   }
   await transaction.wallet.save();
-
+  await transaction.delete();
   return transaction;
 };
 
